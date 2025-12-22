@@ -89,7 +89,7 @@ foreach ($allGrades as $grade) {
         ];
     }
     
-    $gradesByYear[$year][$subjectCode]['quarters'][$grade['period_number']] = $grade['final_grade'];
+    $gradesByYear[$year][$subjectCode]['quarters'][$grade['period_number']] = $grade['quarterly_grade'] ?? null;
 }
 
 $pageTitle = 'Generate SF10 - ' . $student['full_name'];
@@ -180,8 +180,8 @@ $pageTitle = 'Generate SF10 - ' . $student['full_name'];
     <!-- Sidebar -->
     <div class="sidebar no-print">
         <div class="sidebar-brand">
-            <i class="bi bi-journal-check me-2"></i>
-            Teacher Portal
+            <i class="bi bi-mortarboard-fill me-2"></i>
+            <?php echo APP_NAME; ?>
         </div>
         <div class="sidebar-menu">
             <a href="dashboard.php">
@@ -196,7 +196,12 @@ $pageTitle = 'Generate SF10 - ' . $student['full_name'];
             <a href="students-list.php">
                 <i class="bi bi-people"></i> Students
             </a>
-
+            <a href="generate-sf9.php">
+                <i class="bi bi-file-earmark-text"></i> Generate SF9
+            </a>
+            <a href="generate-sf10.php" class="active">
+                <i class="bi bi-file-earmark-pdf"></i> Generate SF10
+            </a>
             <a href="certificates.php">
                 <i class="bi bi-award"></i> Certificates
             </a>

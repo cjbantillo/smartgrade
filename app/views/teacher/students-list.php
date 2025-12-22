@@ -158,6 +158,12 @@ $pageTitle = 'Students List';
             <a href="students-list.php" class="active">
                 <i class="bi bi-people-fill"></i> Students
             </a>
+            <a href="generate-sf9.php">
+                <i class="bi bi-file-earmark-text"></i> Generate SF9
+            </a>
+            <a href="generate-sf10.php">
+                <i class="bi bi-file-earmark-pdf"></i> Generate SF10
+            </a>
    
             <a href="certificates.php">
                 <i class="bi bi-award-fill"></i> Certificates
@@ -274,7 +280,11 @@ $pageTitle = 'Students List';
                                                     <i class="bi bi-eye"></i>
                                                 </a>
                                                 <a href="generate-sf9.php?student_id=<?php echo $student['id']; ?>" 
-                                                   class="btn btn-outline-primary" title="Generate SF9">
+                                                   class="btn btn-outline-primary" title="Generate SF9" target="_blank">
+                                                    <i class="bi bi-file-earmark-text"></i>
+                                                </a>
+                                                <a href="generate-sf10.php?student_id=<?php echo $student['id']; ?>" 
+                                                   class="btn btn-outline-info" title="Generate SF10" target="_blank">
                                                     <i class="bi bi-file-earmark-pdf"></i>
                                                 </a>
                                             </div>

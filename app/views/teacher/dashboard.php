@@ -191,6 +191,12 @@ $pageTitle = 'Teacher Dashboard';
             <a href="students-list.php">
                 <i class="bi bi-people-fill"></i> Students
             </a>
+            <a href="students-list.php" title="Select student to generate SF9">
+                <i class="bi bi-file-earmark-text"></i> Generate SF9
+            </a>
+            <a href="students-list.php" title="Select student to generate SF10">
+                <i class="bi bi-file-earmark-pdf"></i> Generate SF10
+            </a>
           
             <a href="certificates.php">
                 <i class="bi bi-award-fill"></i> Certificates

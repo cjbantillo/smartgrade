@@ -163,7 +163,12 @@ $pageTitle = 'Grade Entry';
             <a href="students-list.php">
                 <i class="bi bi-people-fill"></i> Students
             </a>
-       
+            <a href="students-list.php" title="Select student to generate SF9">
+                <i class="bi bi-file-earmark-text"></i> Generate SF9
+            </a>
+            <a href="students-list.php" title="Select student to generate SF10">
+                <i class="bi bi-file-earmark-pdf"></i> Generate SF10
+            </a>
             <a href="certificates.php">
                 <i class="bi bi-award-fill"></i> Certificates
             </a>
@@ -300,10 +305,28 @@ $pageTitle = 'Grade Entry';
                                     </span>
                                 </td>
                                 <td class="text-center">
-                                    <button type="button" class="btn btn-primary save-btn" 
-                                            onclick="saveGrade(<?php echo $student['student_id']; ?>)">
-                                        <i class="bi bi-save"></i> Save
-                                    </button>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-primary save-btn" 
+                                                onclick="saveGrade(<?php echo $student['student_id']; ?>)">
+                                            <i class="bi bi-save"></i> Save
+                                        </button>
+                                        <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" 
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                            <span class="visually-hidden">Toggle Dropdown</span>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a class="dropdown-item" href="#" onclick="generateReportCard(<?php echo $student['student_id']; ?>); return false;">
+                                                    <i class="bi bi-file-earmark-text me-2"></i>Report Card
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" href="#" onclick="generateSF10(<?php echo $student['student_id']; ?>); return false;">
+                                                    <i class="bi bi-file-earmark-pdf me-2"></i>SF10
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </td>
                             </tr>
                             <?php endforeach; ?>
@@ -480,6 +503,16 @@ $pageTitle = 'Grade Entry';
                     }, 500);
                 });
             }
+        }
+        
+        function generateReportCard(studentId) {
+            // Open report card in new window
+            window.open(`generate-report-card.php?student_id=${studentId}&subject_id=<?php echo $selectedSubjectId ?? 0; ?>&grading_period_id=<?php echo $gradingPeriodId; ?>`, '_blank');
+        }
+        
+        function generateSF10(studentId) {
+            // Open SF10 in new window
+            window.open(`generate-sf10.php?student_id=${studentId}`, '_blank');
         }
     </script>
 </body>

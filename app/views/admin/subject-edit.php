@@ -233,11 +233,11 @@ $pageTitle = 'Edit Subject';
                                 <label class="form-label">Track</label>
                                 <select name="track" class="form-select">
                                     <option value="">Select Track (Optional)</option>
-                                    <option value="Academic" <?php echo $subject['track'] == 'Academic' ? 'selected' : ''; ?>>Academic</option>
-                                    <option value="TVL" <?php echo $subject['track'] == 'TVL' ? 'selected' : ''; ?>>TVL (Technical-Vocational-Livelihood)</option>
-                                    <option value="Sports" <?php echo $subject['track'] == 'Sports' ? 'selected' : ''; ?>>Sports</option>
-                                    <option value="Arts and Design" <?php echo $subject['track'] == 'Arts and Design' ? 'selected' : ''; ?>>Arts and Design</option>
-                                    <option value="All Tracks" <?php echo $subject['track'] == 'All Tracks' ? 'selected' : ''; ?>>All Tracks</option>
+                                    <option value="Academic" <?php echo ($subject['track'] ?? '') == 'Academic' ? 'selected' : ''; ?>>Academic</option>
+                                    <option value="TVL" <?php echo ($subject['track'] ?? '') == 'TVL' ? 'selected' : ''; ?>>TVL (Technical-Vocational-Livelihood)</option>
+                                    <option value="Sports" <?php echo ($subject['track'] ?? '') == 'Sports' ? 'selected' : ''; ?>>Sports</option>
+                                    <option value="Arts and Design" <?php echo ($subject['track'] ?? '') == 'Arts and Design' ? 'selected' : ''; ?>>Arts and Design</option>
+                                    <option value="All Tracks" <?php echo ($subject['track'] ?? '') == 'All Tracks' ? 'selected' : ''; ?>>All Tracks</option>
                                 </select>
                                 <small class="form-text text-muted">Leave blank or select "All Tracks" if subject is for all tracks</small>
                             </div>
@@ -246,7 +246,7 @@ $pageTitle = 'Edit Subject';
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label class="form-label">Strand</label>
-                                <input type="text" name="strand" class="form-control" value="<?php echo htmlspecialchars($subject['strand']); ?>">
+                                <input type="text" name="strand" class="form-control" value="<?php echo htmlspecialchars($subject['strand'] ?? ''); ?>">
                                 <small class="form-text text-muted">Leave blank if subject is for all strands</small>
                             </div>
                             
@@ -284,7 +284,7 @@ $pageTitle = 'Edit Subject';
                     
                     <div class="mb-3">
                         <label class="form-label">Description</label>
-                        <textarea name="description" class="form-control" rows="3"><?php echo htmlspecialchars($subject['description']); ?></textarea>
+                        <textarea name="description" class="form-control" rows="3"><?php echo htmlspecialchars($subject['description'] ?? ''); ?></textarea>
                     </div>
                     
                     <div class="text-end">

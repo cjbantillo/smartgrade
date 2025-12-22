@@ -105,15 +105,19 @@ foreach ($gradesBySubject as $subjectId => &$subject) {
 }
 
 // Get honors
-$stmt = $db->prepare("
-    SELECT h.*, gp.period_name
-    FROM honors h
-    JOIN grading_periods gp ON h.grading_period_id = gp.id
-    WHERE h.student_id = ? AND h.school_year_id = ?
-    ORDER BY gp.period_number
-");
-$stmt->execute([$studentId, $schoolYear['id']]);
-$honors = $stmt->fetchAll(PDO::FETCH_ASSOC);
+try {
+    $stmt = $db->prepare("
+        SELECT h.*, h.semester as period_name
+        FROM honors h
+        WHERE h.student_id = ? AND h.school_year_id = ?
+        ORDER BY h.semester
+    ");
+    $stmt->execute([$studentId, $schoolYear['id']]);
+    $honors = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    // Table doesn't exist or error, ignore
+    $honors = [];
+}
 
 $pageTitle = 'Generate SF9';
 ?>
@@ -231,7 +235,7 @@ $pageTitle = 'Generate SF9';
                 <td><strong>Sex:</strong></td>
                 <td><?php echo htmlspecialchars($student['gender']); ?></td>
                 <td><strong>Date of Birth:</strong></td>
-                <td><?php echo date('F d, Y', strtotime($student['date_of_birth'])); ?></td>
+                <td><?php echo $student['birth_date'] ? date('F d, Y', strtotime($student['birth_date'])) : 'N/A'; ?></td>
             </tr>
             <tr>
                 <td><strong>Grade Level:</strong></td>
@@ -241,7 +245,7 @@ $pageTitle = 'Generate SF9';
             </tr>
             <tr>
                 <td><strong>School Year:</strong></td>
-                <td><?php echo htmlspecialchars($schoolYear['school_year']); ?></td>
+                <td><?php echo htmlspecialchars($schoolYear['year_code'] ?? 'N/A'); ?></td>
                 <td><strong>Track/Strand:</strong></td>
                 <td><?php echo htmlspecialchars($student['strand'] ?? 'STEM'); ?></td>
             </tr>
